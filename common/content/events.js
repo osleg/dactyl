@@ -808,7 +808,7 @@ var Events = Module("events", {
                     return true;
 
                 if (modes.main == modes.PASS_THROUGH)
-                    return true;
+                    return !Events.isEscape(key);
 
                 if (modes.main == modes.QUOTE &&
                         modes.getStack(1).main !== modes.PASS_THROUGH &&
