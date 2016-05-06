@@ -785,12 +785,24 @@ var Events = Module("events", {
         },
 
         keyup: function onKeyUp(event) {
-            if (event.type == "keydown")
-                this.keyEvents.push(event);
-            else if (!this.processor)
-                this.keyEvents = [];
-
             let key = DOM.Event.stringify(event);
+
+            if (modes.main == modes.QUOTE &&
+                    modes.getStack(1).main !== modes.PASS_THROUGH &&
+                    !this.shouldPass(event)) {
+                if (!Events.isModifierKey(key) && event.type == "keyup") {
+                    if (modes.justEntered)
+                        modes.justEntered = false;
+                    else
+                        modes.pop();
+                }
+            }
+            else {
+                if (event.type == "keydown")
+                    this.keyEvents.push(event);
+                else if (!this.processor)
+                    this.keyEvents = [];
+            }
 
             let hasCandidates = mode => {
                 return mappings.hives.some(hive => (hive.get(mode, key, true) ||
@@ -1018,6 +1030,11 @@ var Events = Module("events", {
                                  Ci.nsIDOMHTMLSelectElement]);
     },
 
+    isModifierKey: function isModifierKey(event) {
+        let key = isString(event) ? event : DOM.Event.stringify(event);
+        return key == "<Control>" || key == "<Shift>" || key == "<Alt>";
+    },
+
     kill: function kill(event) {
         event.stopPropagation();
         event.preventDefault();
@@ -1087,6 +1104,7 @@ var Events = Module("events", {
                 if (modes.main == modes.QUOTE)
                     return Events.PASS;
                 modes.push(modes.QUOTE);
+                modes.justEntered = true;
             });
 
         mappings.add([modes.BASE],
