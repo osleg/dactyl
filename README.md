@@ -1,3 +1,9 @@
+This is a personal fork of [5digits/dactyl][].
+
+Mostly it just pulls in PRs submitted upstream, since upstream hasn't been very responsive.
+
+[5digits/dactyl]: https://github.com/5digits/dactyl
+
 # Dactyl
 
 The Dactyl project is largely about digits. Most of us have five of them on each hand. That's a total of ten fingers that we've all spent years training to operate a keyboard of 80 or more keys without any apparent thought. The Dactyl developers can't reconcile this with user interfaces which make such lax use of such a wonderful resource. We like to work efficiently; to access what we need without hunting through menus or cluttering our screen with buttons and bars; and to never have to interrupt our concentration or work flow by reaching for the mouse when we don't need to.
