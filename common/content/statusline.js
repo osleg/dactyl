@@ -201,13 +201,12 @@ var StatusLine = Module("statusline", {
             });
         },
         "fullscreen": function onFullscreen(fullscreen) {
-            let go = options.get("guioptions");
             if (fullscreen) {
-                this.wasVisible = go.has("s");
-                go.op("-", "s");
+                this.wasVisible = !document.getElementById("dactyl-addon-bar").collapsed;
+                dactyl.setNodeVisible(document.getElementById("dactyl-addon-bar"), false);
             }
             else if (this.wasVisible) {
-                go.op("+", "s");
+                dactyl.setNodeVisible(document.getElementById("dactyl-addon-bar"), true);
             }
         }
     },
