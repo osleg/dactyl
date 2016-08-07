@@ -29,6 +29,8 @@ var Modes = Module("modes", {
 
         this.boundProperties = {};
 
+        this.justEntered = false;
+
         this.addMode("BASE", {
             char: "b",
             description: "The base mode for all other modes",
